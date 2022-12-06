@@ -570,7 +570,7 @@ def admin_send_notification_staff(request):
 #         },
 #         "to": token
 #     }
-#     headers = {"Content-Type:application/json","Authorization":"key=AAAAuqSCk_I:APA91bETBHkgnF6Y6hWsVzyFB5RZyuvGXe3wufpLiMnudaUGb4E7lZQ_73sz_AgKsqcUzZNpUmDpQGEEyHkxWNdWPJ3NSTyQpNb_JhEeg7jJwDA4Y8dCU4fIky2jscQaE0R66AIym5iu"}
+#     headers = {"Content-Type:application/json","Authorization":"server-key"}
 #     data = requests.post(url,data=json.dumps(body),headers=headers)
 #     notification = NotificationStudent(student_id=student, message=message)
 #     notification.save()
@@ -591,7 +591,7 @@ def admin_send_notification_staff(request):
 #         },
 #         "to": token
 #     }
-#     headers = {"Content-Type:application/json","Authorization":"key=AAAAuqSCk_I:APA91bETBHkgnF6Y6hWsVzyFB5RZyuvGXe3wufpLiMnudaUGb4E7lZQ_73sz_AgKsqcUzZNpUmDpQGEEyHkxWNdWPJ3NSTyQpNb_JhEeg7jJwDA4Y8dCU4fIky2jscQaE0R66AIym5iu"}
+#     headers = {"Content-Type:application/json","Authorization":"server-key"}
 #     data = requests.post(url,data=json.dumps(body),headers=headers)
 #     notification = NotificationStaff(staff_id=staff, message=message)
 #     notification.save()
