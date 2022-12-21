@@ -24,7 +24,7 @@ urlpatterns = [
 
 
     # HOD url path ----------------------
-    # path('search_expenses',HodViews.search_expenses, name="search_expenses"),
+    path('search_expenses',HodViews.search_expenses, name="search_expenses"),
 
     path('admin_home', HodViews.admin_home, name="admin_home"),
     path('add_staff', HodViews.add_staff, name="add_staff"),

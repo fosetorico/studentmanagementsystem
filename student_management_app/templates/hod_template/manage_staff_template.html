@@ -21,7 +21,7 @@
                     </div>
 
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
+                    <div class="card-body table-responsive p-0 app-table">
                       <table class="table table-hover text-nowrap">
                         <thead>
                           <tr>
@@ -30,7 +30,7 @@
                             <th>Last Name</th>
                             <th>User Name</th>
                             <th>Email</th>
-                            <th>Address</th>
+                            <!-- <th>Address</th> -->
                             <th>Last Login</th>
                             <th>Date Joined</th>
                             <th>Action</th>
@@ -44,7 +44,7 @@
                                     <td>{{staff.admin.last_name}}</td>
                                     <td>{{staff.admin.username}}</td>
                                     <td>{{staff.admin.email}}</td>
-                                    <td>{{staff.address}}</td>
+                                    <!-- <td>{{staff.address}}</td> -->
                                     <td>{{staff.admin.last_login}}</td>
                                     <td>{{staff.admin.date_joined}}</td>
                                     <td><a href="/edit_staff/{{staff.admin.id}}" class="btn btn-success">Edit</a></td>
@@ -53,7 +53,27 @@
                         </tbody>
                       </table>
                     </div>
-                    <!-- /.card-body -->
+                    
+                    <div class="card-body table-responsive p-0">
+                      <table class="table table-hover text-nowrap table-output">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <!-- <th>Address</th> -->
+                            <th>Last Login</th>
+                            <th>Date Joined</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-body">
+
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                   <!-- /.card -->
                 </div>
@@ -63,22 +83,52 @@
           <!-- /.content -->
 {% endblock main_content %}
 {% block custom_js %}
-<!-- <script>
+<script>
   const searchField = document.querySelector("#searchField");
+
+  const appTable = document.querySelector(".app-table")
+  const tableOutput = document.querySelector(".table-output");
+  const tBody = document.querySelector(".table-body");
+  tableOutput.style.display = "none";
+
   searchField.addEventListener("keyup",(e)=>{
     const searchValue = e.target.value;
 
     if(searchValue.trim().length > 0){
       console.log("searchValue",searchValue);
-      fetch("/search_expenses",{
+      tBody.innerHTML = "";
+      fetch("{% url 'search_expenses' %}",{
       body: JSON.stringify({searchText:searchValue}),
       method:"POST",
       })
       .then((res)=>res.json())
       .then((data)=>{
         console.log("data",data);
+        appTable.style.display = "none";
+        tableOutput.style.display = "block";
+
+        if(data.length == 0){
+          tableOutput.innerHTML = "No Results Found"; 
+        }
+        else{
+          data.forEach((item) => {
+            tBody.innerHTML += `
+              <tr>
+                <td>${item.id}</td>
+                <td>${item.first_name}</td>
+                <td>${item.last_name}</td>
+                <td>${item.username}</td>
+                <td>${item.email}</td>
+                <td><a href="/edit_staff/${item.id}" class="btn btn-success">Edit</a></td>
+              </tr>`;
+          });
+        }
       });
     }
+    else{ 
+      appTable.style.display = "block";
+      tableOutput.style.display = "none";
+    }
   });
-</script> -->
+</script>
 {% endblock custom_js %}

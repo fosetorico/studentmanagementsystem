@@ -98,21 +98,22 @@ def manage_staff(request):
     staffs = Staffs.objects.all()
     return render(request, "hod_template/manage_staff_template.html", {"staffs":staffs})
 
-# @csrf_exempt
-# def search_expenses(request):
-#     if request.method == "POST":       
-#         search_str = json.loads(request.body).get("searchText")
+@csrf_exempt
+def search_expenses(request):
+    if request.method == "POST":       
+        search_str = json.loads(request.body).get("searchText")
 
-#         # staff = Staffs.objects.filter(id__istartswith=search_str, admin=request.user)
+        # staff = Staffs.objects.filter(id__istartswith=search_str, admin=request.user)
 
-#         custom_user = CustomUser.objects.filter(
-#             first_name__icontains=search_str, id=request.user.id) | CustomUser.objects.filter(
-#             last_name__icontains=search_str, id=request.user.id) | CustomUser.objects.filter(
-#             username__icontains=search_str, id=request.user.id) | CustomUser.objects.filter(
-#             email__icontains=search_str, id=request.user.id)
+        custom_user = CustomUser.objects.filter(
+            first_name__icontains=search_str, user_type="2") | CustomUser.objects.filter(
+            last_name__icontains=search_str, user_type="2") | CustomUser.objects.filter(
+            username__icontains=search_str, user_type="2") | CustomUser.objects.filter(
+            email__icontains=search_str, user_type="2") | CustomUser.objects.filter(
+            id__icontains=search_str, user_type="2")    # __istartswith for Integer
 
-#         data = custom_user.values()
-#         return JsonResponse(list(data), safe=False)
+        data = custom_user.values()
+        return JsonResponse(list(data), safe=False)
 
 def edit_staff(request, staff_id):
     #return HttpResponse("staff ID:"+ staff_id)

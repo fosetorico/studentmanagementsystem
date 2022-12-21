@@ -4,7 +4,7 @@ from django.contrib import messages
 import json
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
-from django.core import serializers
+# from django.core import serializers
 from student_management_app.models import StudentResult, NotificationStaff, CustomUser, FeedBackStaff, Staffs, LeaveReportStaff, AttendanceReport, Attendance, Subjects, SessionYearModel, Students, Courses
 
 def staff_home(request):
@@ -127,6 +127,7 @@ def get_attendance_students(request):
     # stud = Students.objects.filter(id=attendance_data.student_id)
     list_data = []
     for student in attendance_data:
+        # stud = Students.objects.get(id=student.student_id.admin)
         data_small = {"id":student.student_id.admin.id, "name": student.student_id.admin.first_name+" "+student.student_id.admin.last_name, "status":student.status}
         list_data.append(data_small)
         

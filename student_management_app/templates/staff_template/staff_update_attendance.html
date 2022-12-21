@@ -182,7 +182,7 @@
           })
           .done(function(response){
             var json_data = JSON.parse(response);
-            //alert(response)
+            // alert(response)
             var div_data = "<div class='form-group'><label>Student Attendance:</label></div><div class='form-group'><div class='row'>";
             for(key in json_data){
               div_data += "<div class='col-lg-4'><div class='form-check'><input type='checkbox'"; 
